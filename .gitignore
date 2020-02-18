@@ -1,0 +1,4 @@
+# Project exclude paths
+/eduservice/target/
+*.idea
+*.iml

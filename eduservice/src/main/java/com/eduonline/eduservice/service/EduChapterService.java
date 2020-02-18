@@ -1,0 +1,16 @@
+package com.eduonline.eduservice.service;
+
+import com.eduonline.eduservice.entity.EduChapter;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+ * <p>
+ * 课程 服务类
+ * </p>
+ *
+ * @author Chenxinyi
+ * @since 2020-02-18
+ */
+public interface EduChapterService extends IService<EduChapter> {
+
+}
