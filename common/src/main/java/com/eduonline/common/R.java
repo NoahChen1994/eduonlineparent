@@ -11,13 +11,13 @@ import java.util.Map;
 @Data
 public class R implements ResultCode{
 
-    private Boolean success;
+    private Boolean success; //操作是否成功
 
-    private Integer code;
+    private Integer code;   //响应状态码
 
-    private String message;
+    private String message; //响应消息
 
-    private Map<String,Object> data = new HashMap<>();
+    private Map<String,Object> data = new HashMap<>(); //响应数据
 
     private R(){}
 
@@ -30,6 +30,7 @@ public class R implements ResultCode{
         return r;
     }
 
+    //操作失败
     public static R error(){
         R r = new R();
         r.setSuccess(false);

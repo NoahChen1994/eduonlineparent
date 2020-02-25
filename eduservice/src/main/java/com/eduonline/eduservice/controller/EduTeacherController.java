@@ -20,13 +20,27 @@ import java.util.List;
  * @author Chenxinyi
  * @since 2020-02-18
  */
+@CrossOrigin //解决跨域
 @RestController
-@RequestMapping("/edu-teacher")
+@RequestMapping("/eduservice/eduteacher")
 public class EduTeacherController {
     @Autowired
     EduTeacherService teacherService;
 
+    //模拟返回用户信息
+    @GetMapping("info")
+    public R info(){
+        return R.ok().data("roles","[admin]").data("name","admin").
+                data("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+    }
 
+    //模拟登录
+    @PostMapping("login")
+    public R login(){
+        return R.ok().data("token","admin");
+    }
+
+    //添加讲师
     @PostMapping("addEduTeacher")
     public R addEduTeacher(@RequestBody EduTeacher teacher){
         boolean result = teacherService.save(teacher);
@@ -61,7 +75,7 @@ public class EduTeacherController {
     }
 
     //查询所有讲师
-    @GetMapping
+    @GetMapping("getAllTeacherList")
     public R getAllTeacherList(){
         List<EduTeacher> list = teacherService.list(null);
         return R.ok().data("itmes",list);
@@ -77,8 +91,8 @@ public class EduTeacherController {
         return R.error();
     }
 
-    //按照id修改讲师
-    @PostMapping("updateTeacher/{id}")
+    //按照修改讲师
+    @PostMapping("updateTeacher")
     public R updateTeacher(@RequestBody EduTeacher eduTeacher){
         boolean result = teacherService.updateById(eduTeacher);
         if (result){
@@ -89,8 +103,10 @@ public class EduTeacherController {
 
     //通过id逻辑删除讲师
     @DeleteMapping("{id}")
-    public boolean deleteTeacherById(@PathVariable String id){
-        return teacherService.removeById(id);
+    public R deleteTeacherById(@PathVariable String id){
+         teacherService.removeById(id);
+
+        return R.ok();
     }
 }
 

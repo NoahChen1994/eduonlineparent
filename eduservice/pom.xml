@@ -30,25 +30,17 @@
         </dependency>
 
         <!--swagger-->
-
         <dependency>
-
             <groupId>io.springfox</groupId>
-
             <artifactId>springfox-swagger2</artifactId>
-
         </dependency>
 
         <dependency>
-
             <groupId>io.springfox</groupId>
-
             <artifactId>springfox-swagger-ui</artifactId>
-
         </dependency>
 
         <!--lombok用来简化实体类：需要安装lombok插件-->
-
         <dependency>
             <groupId>org.projectlombok</groupId>
            <artifactId>lombok</artifactId>
@@ -58,7 +50,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
-
+        <!-- poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+        </dependency>
+        <!-- 文件上传 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.eduonline</groupId>
             <artifactId>common</artifactId>

@@ -33,14 +33,14 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         //不为空拼接条件
         QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
         String name = query.getName();
-        String leval = query.getLeval();
+        String level = query.getLevel();
         String begin = query.getBegin();
         String end = query.getEnd();
         if (!StringUtils.isEmpty(name)){
             wrapper.like("name",name);
         }
-        if (!StringUtils.isEmpty(leval)){
-            wrapper.eq("leval",leval);
+        if (!StringUtils.isEmpty(level)){
+            wrapper.eq("level",level);
         }
         if (!StringUtils.isEmpty(begin)){
             wrapper.ge("gmt_create",begin);

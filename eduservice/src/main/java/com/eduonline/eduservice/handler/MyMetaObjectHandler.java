@@ -1,4 +1,4 @@
-package com.eduonline.eduservice.hander;
+package com.eduonline.eduservice.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

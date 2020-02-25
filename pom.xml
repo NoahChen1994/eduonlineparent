@@ -6,6 +6,7 @@
     <modules>
         <module>eduservice</module>
         <module>common</module>
+        <module>eduoss</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -25,6 +26,8 @@
         <mybatis-plus.version>3.0.5</mybatis-plus.version>
         <velocity.version>2.0</velocity.version>
         <swagger.version>2.7.0</swagger.version>
+        <poi.version>4.1.2</poi.version>
+        <commons-fileupload.version>1.4</commons-fileupload.version>
     </properties>
 
     <dependencies>
@@ -69,6 +72,23 @@
                 <version>${swagger.version}</version>
             </dependency>
 
+            <!-- poi -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <!-- 文件上传 -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
