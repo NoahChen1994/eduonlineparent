@@ -18,11 +18,18 @@ import java.util.List;
  */
 public interface EduSubjectService extends IService<EduSubject> {
 
-    /**
-     * 读取excel内容
-     * @param file
-     */
+    //读取excel内容
     List<String> importSubject(MultipartFile file);
 
+    //获取所有分类
     List<SubjectNestedVo> getNestedList();
+
+    //删除一级分类
+    boolean deleteSubjectById(String id);
+
+    //添加一级分类
+    boolean addLevelOneSubject(EduSubject eduSubject);
+
+    //添加二级分类
+    boolean addLevelTwoSubject(EduSubject eduSubject);
 }

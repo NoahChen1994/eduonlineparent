@@ -73,5 +73,7 @@ public class EduCourse implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
+    @ApiModelProperty(value = "课程专业父级ID")
+    private String subjectParentId;
 
 }

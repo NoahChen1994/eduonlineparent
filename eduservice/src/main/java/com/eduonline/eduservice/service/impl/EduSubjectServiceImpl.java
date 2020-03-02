@@ -162,7 +162,6 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
                 SubjectNestedVo parent= map.get(parentId);
                 //拿到父菜单的子菜单
                 List<SubjectVo> children = parent.getChildren();
-
                 SubjectVo vo =new SubjectVo();
                 vo.setId(eduSubject.getId());
                 vo.setTitle(eduSubject.getTitle());
@@ -172,6 +171,65 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
 
         }
         return nestedList;
+    }
+
+    /**
+     * 分类删除
+     *  首先判断是否为二级分类
+     *          是：删除
+     *          否：提示错误
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean deleteSubjectById(String id) {
+        //根据parent_id查询
+       QueryWrapper<EduSubject> queryWrapper = new QueryWrapper<>();
+       queryWrapper.eq("parent_id",id);
+        Integer count = baseMapper.selectCount(queryWrapper);
+        //判断如果有二级分类
+        if (count>0) {
+            return false;
+        } else {//没有二级分类
+            //进行删除
+            int result = baseMapper.deleteById(id);
+            return result>0;
+        }
+    }
+
+    /**
+     * 添加一级分类
+     * @param eduSubject
+     * @return
+     */
+    @Override
+    public boolean addLevelOneSubject(EduSubject eduSubject) {
+        //判断该一级分类是否存在
+        EduSubject subject = this.existOneSubject(eduSubject.getTitle());
+        if(subject==null){ //不存在 添加
+            int insert = baseMapper.insert(eduSubject);
+            return insert>0;
+        }else {
+            return false;
+        }
+    }
+
+    /**
+     * 添加二级分类
+     * @param eduSubject
+     * @return
+     */
+    @Override
+    public boolean addLevelTwoSubject(EduSubject eduSubject) {
+        //判断该二级分类是否存在
+        EduSubject subject = this.existTwoSubject(eduSubject.getTitle(), eduSubject.getParentId());
+        if(subject==null){ //不存在 添加
+            int insert = baseMapper.insert(eduSubject);
+            return insert>0;
+        }else {
+            return false;
+        }
+
     }
 
     //判断是否存在一级目录

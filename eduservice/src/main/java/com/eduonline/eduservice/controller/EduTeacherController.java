@@ -78,7 +78,7 @@ public class EduTeacherController {
     @GetMapping("getAllTeacherList")
     public R getAllTeacherList(){
         List<EduTeacher> list = teacherService.list(null);
-        return R.ok().data("itmes",list);
+        return R.ok().data("items",list);
     }
 
     //按照id查询讲师
