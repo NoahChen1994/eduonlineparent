@@ -7,6 +7,9 @@
         <module>eduservice</module>
         <module>common</module>
         <module>eduoss</module>
+        <module>edueureka</module>
+        <module>edustatistics</module>
+        <module>eduucenter</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -46,6 +49,17 @@
     <dependencyManagement>
 
         <dependencies>
+
+            <!-- Spring Clound -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+          </dependency>
+
+
             <!--mybatis-plus 持久层-->
             <dependency>
                 <groupId>com.baomidou</groupId>

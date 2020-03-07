@@ -7,6 +7,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.eduonline.eduservice.entity.dto.form.EduAllCourseInfoDto;
 import com.eduonline.eduservice.entity.dto.form.EduCourseInfoDto;
 import com.eduonline.eduservice.entity.query.QueryCourse;
+import com.eduonline.eduservice.vo.FrontCourseInfoVo;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -38,4 +42,13 @@ public interface EduCourseService extends IService<EduCourse> {
 
     //根据课程id修改课程发布状态
     boolean updateCourseStatus(String id);
+
+    //前台 根据教师id查询
+    List<EduCourse> getCourseInfoByTeacherId(String teacherId);
+
+    //前台 分页获取所有课程
+    Map<String, Object> getFrontAllTeacherList(Page<EduCourse> eduCoursePage);
+
+    //前台 根据课程id查询课程基本信息 课程描述信息 讲师信息 分类信息
+    FrontCourseInfoVo getAllCourseInfoByCourseId(String courseId);
 }

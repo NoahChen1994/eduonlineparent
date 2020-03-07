@@ -5,6 +5,7 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.eduonline.common.R;
 
 import com.eduonline.eduoss.handler.ConstantPropertiesUtil;
+
 import org.joda.time.DateTime;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,15 @@ import java.util.UUID;
  */
 @CrossOrigin //解决跨域
 @RestController
-@RequestMapping("/eduservice/oss")
+@RequestMapping("/eduoss")
 public class FileUpluadController {
 
+    /**
+     * 封面头像上传
+     * @param file
+     * @param cover
+     * @return
+     */
     @PostMapping("upload")
     public R uploadTeacherImg(@RequestParam("file") MultipartFile file,
                              @RequestParam(value = "host",required = false) String cover) {
@@ -65,10 +72,12 @@ public class FileUpluadController {
 
             //拼接要返回的文件路径
             String path = "http://" + bucketName + "." + endpoint +"/" + filename;
+            System.out.println(path);
             return R.ok().data("imgUrl", path);
         } catch (Exception e) {
             e.printStackTrace();
             return R.error();
         }
     }
+
 }

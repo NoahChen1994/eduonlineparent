@@ -26,7 +26,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value="EduVideo对象", description="课程视频")
 public class EduVideo implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "视频ID")
@@ -74,6 +73,10 @@ public class EduVideo implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+
+    @ApiModelProperty(value = "视频名称")
+    private String videoOriginalName;
+
 
 
 }

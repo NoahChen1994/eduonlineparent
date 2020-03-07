@@ -15,10 +15,15 @@ import com.eduonline.eduservice.service.EduCourseDescriptionService;
 import com.eduonline.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.eduonline.eduservice.service.EduVideoService;
+import com.eduonline.eduservice.vo.FrontCourseInfoVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -203,4 +208,62 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         int result = baseMapper.updateById(eduCourse);
         return result>0;
     }
+
+    /**
+     * 前台 根据讲师id查询课程信息
+     * @param teacherId
+     * @return
+     */
+    @Override
+    public List<EduCourse> getCourseInfoByTeacherId(String teacherId) {
+        QueryWrapper<EduCourse> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("teacher_id", teacherId);
+        //按照最后更新时间倒序排列
+        queryWrapper.orderByDesc("gmt_modified");
+        return baseMapper.selectList(queryWrapper);
+    }
+
+    /**
+     * 前台分页获取所有课程
+     * @param eduCoursePage
+     * @return
+     */
+    @Override
+    public Map<String, Object> getFrontAllTeacherList(Page<EduCourse> eduCoursePage) {
+        //查询获取分页信息
+        QueryWrapper<EduCourse> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("gmt_modified");
+        baseMapper.selectPage(eduCoursePage,queryWrapper);
+
+        //取出数据
+        List<EduCourse> records = eduCoursePage.getRecords();
+        long current = eduCoursePage.getCurrent();
+        long pages = eduCoursePage.getPages();
+        long size = eduCoursePage.getSize();
+        long total = eduCoursePage.getTotal();
+        boolean hasNext = eduCoursePage.hasNext();
+        boolean hasPrevious = eduCoursePage.hasPrevious();
+
+        //封装集合
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+        return map;
+    }
+
+    /**
+     * 前台 根据课程id查询课程基本信息 课程描述信息 讲师信息 分类信息
+     * @param courseId
+     * @return
+     */
+    @Override
+    public FrontCourseInfoVo getAllCourseInfoByCourseId(String courseId) {
+        return  baseMapper.getAllCourseInfoByCourseId(courseId);
+    }
+
 }
