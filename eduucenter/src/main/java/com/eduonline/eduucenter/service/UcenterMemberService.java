@@ -13,6 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UcenterMemberService extends IService<UcenterMember> {
 
+    //根据openid判断数据库表是否已经存在当前扫描微信用户
+    UcenterMember existWxUser(String openid) ;
+
     //统计某天注册人数
     Integer getRegistNumByDay(String day);
 }

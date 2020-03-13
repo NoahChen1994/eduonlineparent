@@ -1,5 +1,6 @@
 package com.eduonline.eduucenter.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.eduonline.eduucenter.entity.UcenterMember;
 import com.eduonline.eduucenter.mapper.UcenterMemberMapper;
 import com.eduonline.eduucenter.service.UcenterMemberService;
@@ -17,6 +18,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, UcenterMember> implements UcenterMemberService {
 
+
+    /**
+     * //根据openid判断数据库表是否已经存在当前扫描微信用户
+     * @param openid
+     * @return
+     */
+    @Override
+    public UcenterMember existWxUser(String openid) {
+        QueryWrapper<UcenterMember> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("openid",openid);
+        return baseMapper.selectOne(queryWrapper);
+    }
 
     /**
      * 统计某天注册人数

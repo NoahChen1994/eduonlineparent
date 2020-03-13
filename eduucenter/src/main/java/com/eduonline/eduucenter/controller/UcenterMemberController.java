@@ -2,7 +2,10 @@ package com.eduonline.eduucenter.controller;
 
 
 import com.eduonline.common.R;
+import com.eduonline.eduucenter.entity.UcenterMember;
 import com.eduonline.eduucenter.service.UcenterMemberService;
+import com.eduonline.eduucenter.util.JwtUtils;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +33,24 @@ public class UcenterMemberController {
     public R getRegistNumByDay(@PathVariable String day){
         Integer result =  memberService.getRegistNumByDay(day);
         return R.ok().data("items",result);
+    }
+
+    /**
+     * 根据token获取用户信息
+     * @param token
+     * @return
+     */
+    @GetMapping("getUserInfoToken/{token}")
+    public R getUserInfoToken(@PathVariable String token){
+        Claims claims = JwtUtils.checkJwt(token);
+        String id = (String)claims.get("id");
+        String nickname = (String)claims.get("nickname");
+        String avatar = (String)claims.get("avatar");
+        UcenterMember member = new UcenterMember();
+        member.setId(id);
+        member.setNickname(nickname);
+        member.setAvatar(avatar);
+        return R.ok().data("items",member);
     }
 
 }

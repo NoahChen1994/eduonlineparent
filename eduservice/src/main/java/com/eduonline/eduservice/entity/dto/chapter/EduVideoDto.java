@@ -20,4 +20,7 @@ public class EduVideoDto {
 
     @ApiModelProperty(value = "是否可以试听：0免费 1收费")
     private String free;
+
+    @ApiModelProperty(value = "视频id")
+    private String videoSourceId;
 }

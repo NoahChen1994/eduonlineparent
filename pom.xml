@@ -10,6 +10,7 @@
         <module>edueureka</module>
         <module>edustatistics</module>
         <module>eduucenter</module>
+        <module>edugateway</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
